@@ -300,8 +300,16 @@ User question: {query}
 
 Answer the question using only the context above. Keep it under 3 sentences. Be factual and neutral."""
 
-    response = model.generate_content(prompt)
-    answer = response.text.strip()
+    try:
+        response = model.generate_content(prompt)
+        answer = response.text.strip()
+    except Exception as e:
+        return {
+            "answer": "⚠️ Too many requests. Please wait 30 seconds and try again.",
+            "source_url": "https://www.miraeassetmf.co.in",
+            "source_label": "Mirae Asset Mutual Fund",
+            "refused": False
+        }
     return {
         "answer": answer,
         "source_url": best_source,
