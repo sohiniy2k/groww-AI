@@ -383,9 +383,11 @@ if not api_key:
         pass
 
 # API Key input
- api_key = st.secrets.get("GOOGLE_API_KEY", "AIzaSyBiSU3Ohq4HDBNsoIcSrXXtLRz9OYx1stY")
+with st.sidebar:
+    if not api_key:
+        api_key = st.text_input("Google AI Studio API Key", type="password", help="Enter your API key or set GOOGLE_API_KEY securely in .streamlit/secrets.toml")
     
-with st.markdown("---"):
+    st.markdown("---")
     st.markdown("**Scope**")
     st.markdown("- **AMC:** Mirae Asset Mutual Fund")
     st.markdown("- **Schemes:** Large Cap, Flexi Cap, ELSS Tax Saver")
